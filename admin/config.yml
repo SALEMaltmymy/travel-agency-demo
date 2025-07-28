@@ -1,0 +1,42 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "offers"
+    label: "عروض السفر"
+    folder: "content/offers"
+    create: true
+    slug: "{{slug}}"
+    format: "json"
+    extension: "json"
+    fields:
+      - { label: "العنوان", name: "title", widget: "string" }
+      - { label: "الوصف", name: "description", widget: "text" }
+      - { label: "السعر", name: "price", widget: "string" }
+      - { label: "الوجهة", name: "destination", widget: "string" }
+      - { label: "تاريخ الرحلة", name: "date", widget: "datetime" }
+
+  - name: "ads"
+    label: "الإعلانات"
+    folder: "content/ads"
+    create: true
+    slug: "{{slug}}"
+    format: "json"
+    extension: "json"
+    fields:
+      - { label: "عنوان الإعلان", name: "title", widget: "string" }
+      - { label: "محتوى الإعلان", name: "body", widget: "text" }
+
+  - name: "contact"
+    label: "معلومات التواصل"
+    files:
+      - file: "content/contact.json"
+        label: "تواصل"
+        name: "contact"
+        fields:
+          - { label: "رقم الهاتف", name: "phone", widget: "string" }
+          - { label: "البريد الإلكتروني", name: "email", widget: "string" }
