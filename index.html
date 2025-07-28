@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>وكالة السفر اليمنية</title>
+</head>
+<body>
+  <h1>مرحبًا بكم في وكالة السفر اليمنية</h1>
+
+  <section id="offers">
+    <h2>عروض السفر</h2>
+    <div id="offers-list"></div>
+  </section>
+
+  <section id="ads">
+    <h2>الإعلانات</h2>
+    <div id="ads-list"></div>
+  </section>
+
+  <section id="contact">
+    <h2>تواصل معنا</h2>
+    <p id="phone"></p>
+    <p id="email"></p>
+  </section>
+
+  <script>
+    async function fetchData(filePath) {
+      const response = await fetch(filePath);
+      return await response.json();
+    }
+
+    async function loadContent() {
+      try {
+        const offers = await fetchData('content/offers/offers.json');
+        const ads = await fetchData('content/ads/ads.json');
+        const contact = await fetchData('content/contact.json');
+
+        const offersDiv = document.getElementById('offers-list');
+        offers.forEach(item => {
+          offersDiv.innerHTML += `<div><strong>${item.title}</strong> - ${item.price} - ${item.destination}</div>`;
+        });
+
+        const adsDiv = document.getElementById('ads-list');
+        ads.forEach(ad => {
+          adsDiv.innerHTML += `<div><strong>${ad.title}</strong>: ${ad.body}</div>`;
+        });
+
+        document.getElementById('phone').innerText = `📞 الهاتف: ${contact.phone}`;
+        document.getElementById('email').innerText = `📧 البريد: ${contact.email}`;
+      } catch (e) {
+        console.error("فشل تحميل البيانات", e);
+      }
+    }
+
+    loadContent();
+  </script>
+</body>
+</html>
