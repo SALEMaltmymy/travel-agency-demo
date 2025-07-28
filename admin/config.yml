@@ -2,41 +2,31 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "images/uploads"
+media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
 collections:
+  - name: "contact"
+    label: "Contact"
+    files:
+      - label: "Contact Info"
+        name: "contact"
+        file: "content/contact.json"
+        format: "json"
+        fields:
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Phone", name: "phone", widget: "string" }
+
   - name: "offers"
-    label: "عروض السفر"
+    label: "Offers"
     folder: "content/offers"
     create: true
     slug: "{{slug}}"
-    format: "json"
     extension: "json"
-    fields:
-      - { label: "العنوان", name: "title", widget: "string" }
-      - { label: "الوصف", name: "description", widget: "text" }
-      - { label: "السعر", name: "price", widget: "string" }
-      - { label: "الوجهة", name: "destination", widget: "string" }
-      - { label: "تاريخ الرحلة", name: "date", widget: "datetime" }
-
-  - name: "ads"
-    label: "الإعلانات"
-    folder: "content/ads"
-    create: true
-    slug: "{{slug}}"
     format: "json"
-    extension: "json"
     fields:
-      - { label: "عنوان الإعلان", name: "title", widget: "string" }
-      - { label: "محتوى الإعلان", name: "body", widget: "text" }
-
-  - name: "contact"
-    label: "معلومات التواصل"
-    files:
-      - file: "content/contact.json"
-        label: "تواصل"
-        name: "contact"
-        fields:
-          - { label: "رقم الهاتف", name: "phone", widget: "string" }
-          - { label: "البريد الإلكتروني", name: "email", widget: "string" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Price", name: "price", widget: "number" }
+      - { label: "Image", name: "image", widget: "image" }
