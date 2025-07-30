@@ -1,69 +1,61 @@
-<!DOCTYPE html>
-<html lang="ar">
+<!DOCTYPE html><html lang="ar">
 <head>
   <meta charset="UTF-8" />
   <title>لوحة تحكم - تجوّل</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
     body {
-      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background-color: #f1f3f6;
+      font-family: 'Inter', sans-serif;
+      background-color: #f9f9f9;
       margin: 0;
       padding: 0;
       direction: rtl;
-      color: #333;
     }
     header {
-      background: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background-color: white;
       padding: 20px;
+      text-align: center;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     header img {
-      max-height: 60px;
+      max-width: 160px;
     }
     .container {
-      max-width: 700px;
-      margin: 30px auto;
-      background: white;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
     }
     h1 {
       font-size: 26px;
-      font-weight: 700;
+      font-weight: bold;
       margin-bottom: 20px;
     }
-    .form-group {
+    .form-group, .offer {
       margin-bottom: 20px;
     }
     input, textarea {
       width: 100%;
       padding: 12px;
-      font-size: 17px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font-weight: 500;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-top: 6px;
     }
     button {
-      padding: 12px 25px;
+      padding: 10px 20px;
       background-color: #0077b6;
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 5px;
       cursor: pointer;
       font-size: 16px;
-      font-weight: bold;
     }
     .progress {
-      height: 22px;
+      height: 20px;
       background: #eee;
-      border-radius: 8px;
+      border-radius: 5px;
       margin-top: 10px;
       overflow: hidden;
     }
@@ -75,47 +67,39 @@
       text-align: center;
       transition: width 0.3s;
     }
-    .success { color: green; margin-top: 10px; }
-    .error { color: red; margin-top: 10px; }
+    .success { color: green; }
+    .error { color: red; }
     .offers {
-      margin-top: 40px;
+      margin-top: 30px;
     }
     .offer {
-      background: #fafafa;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.07);
-      margin-bottom: 20px;
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
     .offer img {
       width: 100%;
-      max-height: 250px;
+      max-height: 200px;
       object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 15px;
+      border-radius: 5px;
     }
     .offer h3 {
-      font-size: 20px;
+      margin-top: 10px;
       font-weight: bold;
-      margin: 0 0 10px;
     }
-    .offer p {
-      margin: 5px 0;
-      font-size: 16px;
-    }
+    .offer p { margin: 5px 0; }
     .offer .delete-btn {
       background: red;
-      margin-top: 15px;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-
 <header>
   <img src="https://tajawol.netlify.app/tajawal.png" alt="شعار تجوّل">
 </header>
-
-<div class="container">
+<div class="container" id="contentSection">
   <h1>إضافة عرض جديد</h1>
   <div class="form-group">
     <label>العنوان:</label>
@@ -137,107 +121,101 @@
     <div class="progress-bar" id="progressBar">0%</div>
   </div>
   <p id="status"></p>
-  <button onclick="submitOffer()">إضافة العرض</button>
+  <button onclick="submitOffer()">إضافة العرض</button>  <div class="offers" id="offers"></div>
+</div><script>
+  const supabase = supabase.createClient(
+    'https://ysyrelggunkszyhannai.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzeXJlbGdndW5rc3p5aGFubmFpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM4NTkyNzgsImV4cCI6MjA2OTQzNTI3OH0.rnFETaEu6MOllsnNx0_IvAj26LTHKslHTXAfeza78NY'
+  );
 
-  <div class="offers" id="offers"></div>
-</div>
+  window.onload = () => {
+    loadOffers();
+  };
 
-<script>
-const supabase = createClient(
-  'https://ysyrelggunkszyhannai.supabase.co',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzeXJlbGdndW5rc3p5aGFubmFpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM4NTkyNzgsImV4cCI6MjA2OTQzNTI3OH0.rnFETaEu6MOllsnNx0_IvAj26LTHKslHTXAfeza78NY'
-);
+  async function submitOffer() {
+    const title = document.getElementById('title').value;
+    const description = document.getElementById('description').value;
+    const price = document.getElementById('price').value;
+    const imageFile = document.getElementById('image').files[0];
+    const status = document.getElementById('status');
+    const progressBar = document.getElementById('progressBar');
+    const progressWrapper = document.getElementById('progressWrapper');
 
-window.onload = () => {
-  loadOffers();
-};
+    if (!title || !description || !price || !imageFile) {
+      status.innerText = 'جميع الحقول مطلوبة';
+      return;
+    }
 
-async function submitOffer() {
-  const title = document.getElementById('title').value;
-  const description = document.getElementById('description').value;
-  const price = document.getElementById('price').value;
-  const imageFile = document.getElementById('image').files[0];
-  const status = document.getElementById('status');
-  const progressBar = document.getElementById('progressBar');
-  const progressWrapper = document.getElementById('progressWrapper');
+    const fileName = Date.now() + '-' + imageFile.name;
+    progressWrapper.style.display = 'block';
+    progressBar.style.width = '0%';
+    progressBar.innerText = '0%';
 
-  if (!title || !description || !price || !imageFile) {
-    status.innerText = 'جميع الحقول مطلوبة';
-    return;
+    try {
+      const upload = await supabase.storage.from('offers-images').upload(fileName, imageFile, {
+        onUploadProgress: (event) => {
+          const percent = Math.round((event.loaded / event.total) * 100);
+          progressBar.style.width = percent + '%';
+          progressBar.innerText = percent + '%';
+        }
+      });
+
+      if (upload.error) throw upload.error;
+
+      const imageUrl = `https://ysyrelggunkszyhannai.supabase.co/storage/v1/object/public/offers-images/${fileName}`;
+
+      const { error } = await supabase.from('offers').insert([
+        { title, description, price, image_url: imageUrl }
+      ]);
+
+      if (error) throw error;
+
+      status.innerHTML = '<span class="success">✅ تم إضافة العرض بنجاح</span>';
+      document.getElementById('title').value = '';
+      document.getElementById('description').value = '';
+      document.getElementById('price').value = '';
+      document.getElementById('image').value = '';
+      loadOffers();
+    } catch (err) {
+      status.innerHTML = `<span class="error">❌ فشل الإضافة: ${err.message}</span>`;
+    } finally {
+      progressWrapper.style.display = 'none';
+    }
   }
 
-  const fileName = Date.now() + '-' + imageFile.name;
-  progressWrapper.style.display = 'block';
-  progressBar.style.width = '0%';
-  progressBar.innerText = '0%';
+  async function loadOffers() {
+    const { data, error } = await supabase.from('offers').select('*').order('created_at', { ascending: false });
+    const offersContainer = document.getElementById('offers');
+    offersContainer.innerHTML = '';
 
-  try {
-    const upload = await supabase.storage.from('offers-images').upload(fileName, imageFile, {
-      onUploadProgress: (event) => {
-        const percent = Math.round((event.loaded / event.total) * 100);
-        progressBar.style.width = percent + '%';
-        progressBar.innerText = percent + '%';
-      }
+    if (error) {
+      offersContainer.innerHTML = `<p class="error">خطأ في جلب البيانات: ${error.message}</p>`;
+      return;
+    }
+
+    data.forEach(offer => {
+      const div = document.createElement('div');
+      div.className = 'offer';
+      div.innerHTML = `
+        <img src="${offer.image_url}" alt="صورة">
+        <h3>${offer.title}</h3>
+        <p>${offer.description}</p>
+        <p><strong>السعر:</strong> ${offer.price} ريال</p>
+        <button class="delete-btn" onclick="deleteOffer(${offer.id})">حذف العرض</button>
+      `;
+      offersContainer.appendChild(div);
     });
-
-    if (upload.error) throw upload.error;
-
-    const imageUrl = `https://ysyrelggunkszyhannai.supabase.co/storage/v1/object/public/offers-images/${fileName}`;
-
-    const { error } = await supabase.from('offers').insert([
-      { title, description, price, image_url: imageUrl }
-    ]);
-
-    if (error) throw error;
-
-    status.innerHTML = '<span class="success">✅ تم إضافة العرض بنجاح</span>';
-    document.getElementById('title').value = '';
-    document.getElementById('description').value = '';
-    document.getElementById('price').value = '';
-    document.getElementById('image').value = '';
-    loadOffers();
-  } catch (err) {
-    status.innerHTML = `<span class="error">❌ فشل الإضافة: ${err.message}</span>`;
-  } finally {
-    progressWrapper.style.display = 'none';
-  }
-}
-
-async function loadOffers() {
-  const { data, error } = await supabase.from('offers').select('*').order('created_at', { ascending: false });
-  const offersContainer = document.getElementById('offers');
-  offersContainer.innerHTML = '';
-
-  if (error) {
-    offersContainer.innerHTML = `<p class="error">خطأ في جلب البيانات: ${error.message}</p>`;
-    return;
   }
 
-  data.forEach(offer => {
-    const div = document.createElement('div');
-    div.className = 'offer';
-    div.innerHTML = `
-      <img src="${offer.image_url}" alt="صورة">
-      <h3>${offer.title}</h3>
-      <p>${offer.description}</p>
-      <p><strong>السعر:</strong> ${offer.price} ريال</p>
-      <button class="delete-btn" onclick="deleteOffer(${offer.id})">حذف العرض</button>
-    `;
-    offersContainer.appendChild(div);
-  });
-}
-
-async function deleteOffer(id) {
-  if (!confirm('هل أنت متأكد من حذف هذا العرض؟')) return;
-  const { error } = await supabase.from('offers').delete().eq('id', id);
-  if (error) {
-    alert('حدث خطأ أثناء الحذف: ' + error.message);
-  } else {
-    alert('تم حذف العرض بنجاح');
-    loadOffers();
+  async function deleteOffer(id) {
+    if (!confirm('هل أنت متأكد من حذف هذا العرض؟')) return;
+    const { error } = await supabase.from('offers').delete().eq('id', id);
+    if (error) {
+      alert('حدث خطأ أثناء الحذف: ' + error.message);
+    } else {
+      alert('تم حذف العرض بنجاح');
+      loadOffers();
+    }
   }
-}
-</script>
-
-</body>
+</script></body>
 </html>
