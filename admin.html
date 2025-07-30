@@ -7,141 +7,34 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@600&display=swap');
     body {
-      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-family: 'SF Pro Display', sans-serif;
       background-color: #f9f9f9;
       margin: 0;
       padding: 20px;
       color: #222;
+      direction: rtl;
     }
-    header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 25px;
-      border-bottom: 2px solid #0077b6;
-      padding-bottom: 10px;
-    }
-    header img {
-      height: 50px;
-      margin-left: 15px;
-    }
-    header h1 {
-      font-weight: 700;
-      font-size: 30px;
-      margin: 0;
-      color: #0077b6;
-    }
-    .form-group {
-      margin-bottom: 20px;
-    }
-    label {
-      font-weight: 700;
-      font-size: 17px;
-      display: block;
-      margin-bottom: 5px;
-    }
-    input[type="text"],
-    input[type="number"],
-    textarea,
-    input[type="file"] {
-      width: 100%;
-      padding: 12px 10px;
-      font-size: 16px;
-      border: 1.5px solid #ccc;
-      border-radius: 6px;
-      box-sizing: border-box;
-    }
-    textarea {
-      resize: vertical;
-      min-height: 80px;
-    }
-    button {
-      background-color: #0077b6;
-      color: white;
-      border: none;
-      border-radius: 7px;
-      padding: 12px 25px;
-      font-size: 18px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      margin-top: 10px;
-    }
-    button:hover {
-      background-color: #005f87;
-    }
-    .progress {
-      margin-top: 10px;
-      height: 22px;
-      background: #ddd;
-      border-radius: 10px;
-      overflow: hidden;
-      display: none;
-    }
-    .progress-bar {
-      height: 100%;
-      background-color: #0077b6;
-      width: 0%;
-      color: white;
-      text-align: center;
-      line-height: 22px;
-      font-weight: 700;
-      transition: width 0.3s ease;
-    }
-    #status {
-      margin-top: 10px;
-      font-weight: 700;
-      font-size: 16px;
-    }
-    #status.success {
-      color: green;
-    }
-    #status.error {
-      color: red;
-    }
-    .offers {
-      margin-top: 35px;
-    }
-    .offer {
-      background: white;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 7px rgba(0,0,0,0.1);
-      margin-bottom: 20px;
-      font-weight: 600;
-    }
-    .offer img {
-      width: 100%;
-      max-height: 200px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 12px;
-    }
-    .offer h3 {
-      margin: 0 0 8px 0;
-      font-weight: 700;
-      font-size: 22px;
-      color: #0077b6;
-    }
-    .offer p {
-      margin: 4px 0;
-      font-size: 16px;
-      line-height: 1.3;
-    }
-    .delete-btn {
-      background: #d62828;
-      border: none;
-      border-radius: 6px;
-      padding: 8px 16px;
-      color: white;
-      cursor: pointer;
-      font-weight: 700;
-      margin-top: 12px;
-      transition: background-color 0.25s ease;
-    }
-    .delete-btn:hover {
-      background: #a81c1c;
-    }
+    header { display: flex; align-items: center; margin-bottom: 25px; border-bottom: 2px solid #0077b6; padding-bottom: 10px; }
+    header img { height: 50px; margin-left: 15px; }
+    header h1 { font-weight: 700; font-size: 30px; margin: 0; color: #0077b6; }
+    .form-group { margin-bottom: 20px; }
+    label { font-weight: 700; font-size: 17px; display: block; margin-bottom: 5px; }
+    input[type="text"], input[type="number"], textarea, input[type="file"] { width: 100%; padding: 12px 10px; font-size: 16px; border: 1.5px solid #ccc; border-radius: 6px; box-sizing: border-box; }
+    textarea { resize: vertical; min-height: 80px; }
+    button { background-color: #0077b6; color: white; border: none; border-radius: 7px; padding: 12px 25px; font-size: 18px; font-weight: 700; cursor: pointer; transition: background-color 0.3s ease; margin-top: 10px; }
+    button:hover { background-color: #005f87; }
+    .progress { margin-top: 10px; height: 22px; background: #ddd; border-radius: 10px; overflow: hidden; display: none; }
+    .progress-bar { height: 100%; background-color: #0077b6; width: 0%; color: white; text-align: center; line-height: 22px; font-weight: 700; transition: width 0.3s ease; }
+    #status { margin-top: 10px; font-weight: 700; font-size: 16px; }
+    #status.success { color: green; }
+    #status.error { color: red; }
+    .offers { margin-top: 35px; }
+    .offer { background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 7px rgba(0,0,0,0.1); margin-bottom: 20px; font-weight: 600; }
+    .offer img { width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 12px; }
+    .offer h3 { margin: 0 0 8px 0; font-weight: 700; font-size: 22px; color: #0077b6; }
+    .offer p { margin: 4px 0; font-size: 16px; line-height: 1.3; }
+    .delete-btn { background: #d62828; border: none; border-radius: 6px; padding: 8px 16px; color: white; cursor: pointer; font-weight: 700; margin-top: 12px; transition: background-color 0.25s ease; }
+    .delete-btn:hover { background: #a81c1c; }
   </style>
 </head>
 <body>
@@ -171,67 +64,119 @@
     <div class="progress-bar" id="progressBar">0%</div>
   </div>
   <p id="status"></p>
-  <button onclick="submitOffer()">إضافة العرض</button>
+  <button id="submitBtn">إضافة العرض</button>
   <div class="offers" id="offers"></div>
 </section>
 <script>
-  // Use distinct variable for client to avoid shadowing global
-  const supabaseUrl = 'https://ysyrelggunkszyhannai.supabase.co';
-  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzeXJlbGdndW5rc3p5aGFubmFpIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1Mzg1OTI3OCwiZXhwIjoyMDY5NDM1Mjc4fQ.IHoqg0LRq9GFgWima30JEw-j4g7J4zgT4OZ0iXTbEfg';
-  const client = supabase.createClient(supabaseUrl, supabaseKey);window.onload = () => { loadOffers(); };
+  document.addEventListener('DOMContentLoaded', () => {
+    const { createClient } = supabase;
+    const supabaseUrl = 'https://ysyrelggunkszyhannai.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzeXJlbGdndW5rc3p5aGFubmFpIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1Mzg1OTI3OCwiZXhwIjoyMDY5NDM1Mjc4fQ.IHoqg0LRq9GFgWima30JEw-j4g7J4zgT4OZ0iXTbEfg';
+    const client = createClient(supabaseUrl, supabaseKey);const submitBtn = document.getElementById('submitBtn');
+submitBtn.addEventListener('click', submitOffer);
 
-async function submitOffer() { const title = document.getElementById('title').value.trim(); const description = document.getElementById('description').value.trim(); const price = document.getElementById('price').value.trim(); const imageFile = document.getElementById('image').files[0]; const statusEl = document.getElementById('status'); const progressWrapper = document.getElementById('progressWrapper'); const progressBar = document.getElementById('progressBar');
+loadOffers();
 
-statusEl.textContent = '';
-statusEl.className = '';
-if (!title || !description || !price || !imageFile) {
-  statusEl.textContent = 'جميع الحقول مطلوبة';
-  statusEl.className = 'error';
-  return;
+async function submitOffer() {
+  const title = document.getElementById('title').value.trim();
+  const description = document.getElementById('description').value.trim();
+  const price = document.getElementById('price').value.trim();
+  const imageFile = document.getElementById('image').files[0];
+  const statusEl = document.getElementById('status');
+  const progressWrapper = document.getElementById('progressWrapper');
+  const progressBar = document.getElementById('progressBar');
+
+  statusEl.textContent = '...جاري الإرسال';
+  statusEl.className = '';
+
+  if (!title || !description || !price || !imageFile) {
+    statusEl.textContent = 'جميع الحقول مطلوبة';
+    statusEl.className = 'error';
+    return;
+  }
+
+  progressWrapper.style.display = 'block';
+  progressBar.style.width = '0%';
+  progressBar.textContent = '0%';
+
+  try {
+    const { error: uploadError } = await client.storage
+      .from('offers-images')
+      .upload(`${Date.now()}-${imageFile.name}`, imageFile, {
+        onProgress: (e) => {
+          const pct = Math.round((e.loaded / e.total) * 100);
+          progressBar.style.width = `${pct}%`;
+          progressBar.textContent = `${pct}%`;
+        }
+      });
+    if (uploadError) throw uploadError;
+
+    const imageUrl = `${supabaseUrl}/storage/v1/object/public/offers-images/${Date.now()}-${imageFile.name}`;
+    const { error: insertError } = await client.from('offers').insert([
+      { title, description, price: Number(price), image_url: imageUrl }
+    ]);
+    if (insertError) throw insertError;
+
+    statusEl.textContent = '✅ تم إضافة العرض بنجاح';
+    statusEl.className = 'success';
+    clearForm();
+    loadOffers();
+  } catch (err) {
+    statusEl.textContent = `❌ فشل الإضافة: ${err.message}`;
+    statusEl.className = 'error';
+  } finally {
+    progressWrapper.style.display = 'none';
+  }
 }
 
-const fileName = `${Date.now()}-${imageFile.name}`;
-progressWrapper.style.display = 'block';
-progressBar.style.width = '0%';
-progressBar.textContent = '0%';
-
-try {
-  const { error: uploadError } = await client.storage
-    .from('offers-images')
-    .upload(fileName, imageFile, {
-      onProgress: (e) => {
-        const pct = Math.round((e.loaded / e.total) * 100);
-        progressBar.style.width = `${pct}%`;
-        progressBar.textContent = `${pct}%`;
-      }
+async function loadOffers() {
+  const offersContainer = document.getElementById('offers');
+  offersContainer.innerHTML = '...جاري تحميل العروض';
+  try {
+    const { data, error } = await client.from('offers').select('*').order('created_at', { ascending: false });
+    if (error) throw error;
+    offersContainer.innerHTML = '';
+    if (!data.length) {
+      offersContainer.innerHTML = '<p>لا توجد عروض حالياً</p>';
+      return;
+    }
+    data.forEach((offer) => {
+      const div = document.createElement('div');
+      div.className = 'offer';
+      div.innerHTML = `
+        <img src="${offer.image_url}" alt="صورة العرض" />
+        <h3>${offer.title}</h3>
+        <p>${offer.description}</p>
+        <p><strong>السعر:</strong> ${offer.price} ريال</p>
+        <button class="delete-btn" onclick="deleteOffer(${offer.id})">حذف العرض</button>
+      `;
+      offersContainer.appendChild(div);
     });
-  if (uploadError) throw uploadError;
+  } catch (error) {
+    offersContainer.innerHTML = `<p class="error">خطأ في جلب البيانات: ${error.message}</p>`;
+  }
+}
 
-  const imageUrl = `${supabaseUrl}/storage/v1/object/public/offers-images/${fileName}`;
-  const { error: insertError } = await client
-    .from('offers')
-    .insert([{ title, description, price: Number(price), image_url: imageUrl }]);
-  if (insertError) throw insertError;
-
-  statusEl.textContent = '✅ تم إضافة العرض بنجاح';
-  statusEl.className = 'success';
+function clearForm() {
   document.getElementById('title').value = '';
   document.getElementById('description').value = '';
   document.getElementById('price').value = '';
   document.getElementById('image').value = '';
-  loadOffers();
-} catch (err) {
-  statusEl.textContent = `❌ فشل الإضافة: ${err.message}`;
-  statusEl.className = 'error';
-} finally {
-  progressWrapper.style.display = 'none';
 }
 
-}
+window.deleteOffer = async (id) => {
+  if (!confirm('هل أنت متأكد من حذف هذا العرض؟')) return;
+  try {
+    const { error } = await client.from('offers').delete().eq('id', id);
+    if (error) throw error;
+    alert('تم حذف العرض بنجاح');
+    loadOffers();
+  } catch (error) {
+    alert('حدث خطأ أثناء الحذف: ' + error.message);
+  }
+};
 
-async function loadOffers() { const offersContainer = document.getElementById('offers'); offersContainer.innerHTML = '...جاري تحميل العروض'; try { const { data, error } = await client .from('offers') .select('*') .order('created_at', { ascending: false }); if (error) throw error; if (!data.length) { offersContainer.innerHTML = '<p>لا توجد عروض حاليا</p>'; return; } offersContainer.innerHTML = ''; data.forEach((offer) => { const div = document.createElement('div'); div.className = 'offer'; div.innerHTML = <img src="${offer.image_url}" alt="صورة العرض" /> <h3>${offer.title}</h3> <p>${offer.description}</p> <p><strong>السعر:</strong> ${offer.price} ريال</p> <button class="delete-btn" onclick="deleteOffer(${offer.id})">حذف العرض</button>; offersContainer.appendChild(div); }); } catch (error) { offersContainer.innerHTML = <p class="error">خطأ في جلب البيانات: ${error.message}</p>; } }
-
-async function deleteOffer(id) { if (!confirm('هل أنت متأكد من حذف هذا العرض؟')) return; try { const { error } = await client.from('offers').delete().eq('id', id); if (error) throw error; alert('تم حذف العرض بنجاح'); loadOffers(); } catch (error) { alert('حدث خطأ أثناء الحذف: ' + error.message); } } </script>
+}); </script>
 
 </body>
 </html>
